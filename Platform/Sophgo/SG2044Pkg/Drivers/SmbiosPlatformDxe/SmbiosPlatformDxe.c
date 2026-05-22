@@ -17,6 +17,7 @@
 
 #include <Library/BaseLib.h>
 #include <Library/BaseMemoryLib.h>
+#include <Library/BaseRiscVSbiLib.h>
 #include <Library/DebugLib.h>
 #include <Library/HiiLib.h>
 #include <Library/MemoryAllocationLib.h>
@@ -532,3 +533,59 @@ SmbiosPlatformDxeDirectAddRecord (
   return Status;
 }
 
+/**
+  Retrieve the machine vendor ID via SBI call.
+
+  Calls SBI_EXT_BASE_GET_MVENDORID to read the RISC-V machine vendor ID
+  (mvendorid) CSR.
+
+  @param[out]  MachineVendorId  Pointer to receive the machine vendor ID.
+**/
+VOID SbiGetMachineVendorId (
+  OUT UINTN  *MachineVendorId
+  )
+{
+  SBI_RET  Ret;
+
+  Ret = SbiCall (SBI_EXT_BASE, SBI_EXT_BASE_GET_MVENDORID, 0);
+
+  *MachineVendorId = (UINTN)Ret.Value;
+}
+
+/**
+  Retrieve the machine architecture ID via SBI call.
+
+  Calls SBI_EXT_BASE_GET_MARCHID to read the RISC-V machine architecture ID
+  (marchid) CSR.
+
+  @param[out]  MachineArchId  Pointer to receive the machine architecture ID.
+**/
+VOID SbiGetMachineArchId (
+  OUT UINTN  *MachineArchId
+  )
+{
+  SBI_RET  Ret;
+
+  Ret = SbiCall (SBI_EXT_BASE, SBI_EXT_BASE_GET_MARCHID, 0);
+
+  *MachineArchId = (UINTN)Ret.Value;
+}
+
+/**
+  Retrieve the machine implementation ID via SBI call.
+
+  Calls SBI_EXT_BASE_GET_MIMPID to read the RISC-V machine implementation ID
+  (mimpid) CSR.
+
+  @param[out]  MachineImplId  Pointer to receive the machine implementation ID.
+**/
+VOID SbiGetMachineImplId (
+  OUT UINTN  *MachineImplId
+  )
+{
+  SBI_RET  Ret;
+
+  Ret = SbiCall (SBI_EXT_BASE, SBI_EXT_BASE_GET_MIMPID, 0);
+
+  *MachineImplId = (UINTN)Ret.Value;
+}
