@@ -22,7 +22,7 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE41, PlatformOnboardDevicesExten
     ADDITIONAL_STR_INDEX_1,                                 // Reference Designation
     0x85,                                                   // Device Type
     0,                                                      // Device Type Instance
-    0xFF,                                                   // Segment Group Number
+    0xFFFF,                                                 // Segment Group Number
     0xFF,                                                   // Bus Number
     0xFF                                                    // Device Function Number
   },

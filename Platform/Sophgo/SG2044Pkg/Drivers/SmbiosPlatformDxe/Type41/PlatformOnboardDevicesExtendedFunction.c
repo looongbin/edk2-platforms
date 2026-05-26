@@ -36,7 +36,7 @@ SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformOnboardDevicesExtended) {
   STR_TOKEN_INFO                    *InputStrToken;
   SMBIOS_TABLE_TYPE41               *InputData;
   SMBIOS_TABLE_TYPE41               *Type41Record;
-  UINT32                            Index, SlotID, InstanceNum;
+  UINT32                            Index, SlotID, InstanceNum, NumberOfControllers, BoardSlotID;
   CHAR16                            SlotDesignation[SMBIOS_UNICODE_STRING_MAX_LENGTH];
   PCIE_HOST_BRIDGE_TABLE            *PcieRcConfig;
 
@@ -45,42 +45,19 @@ SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformOnboardDevicesExtended) {
   InputStrToken = (STR_TOKEN_INFO *)StrToken;
 
   InstanceNum = 0;
-  while (InputData->Hdr.Type != NULL_TERMINATED_TYPE) {
-    InputData->DeviceTypeInstance = InstanceNum;
-    SmbiosPlatformDxeCreateTable (
-      (VOID *)&Type41Record,
-      (VOID *)&InputData,
-      sizeof (SMBIOS_TABLE_TYPE41),
-      InputStrToken
-      );
-    if (Type41Record == NULL) {
-      return EFI_OUT_OF_RESOURCES;
-    }
-
-    Status = SmbiosPlatformDxeAddRecord ((UINT8 *)Type41Record, NULL);
-    if (EFI_ERROR (Status)) {
-      FreePool (Type41Record);
-      return Status;
-    }
-
-    FreePool (Type41Record);
-    InputData++;
-    InputStrToken++;
-    InstanceNum++;
-  }
-
-  InputData        = (SMBIOS_TABLE_TYPE41 *)RecordData;
-  InputStrToken    = (STR_TOKEN_INFO *)StrToken;
   PcieRcConfig  = (PCIE_HOST_BRIDGE_TABLE *)PcdGetPtr (PcdPcieHostBridgeTable);
+  NumberOfControllers = PcieRcConfig->NumOfControllers;
+
   if (PcieRcConfig == NULL) {
     DEBUG ((DEBUG_ERROR, "[%a] No PCIe host bridge configuration found\n", __func__));
     return EFI_NOT_FOUND;
   }
 
-  for (Index = 0; Index < PcieRcConfig->NumOfControllers; ++Index) {
+  for (Index = 0; Index < NumberOfControllers; ++Index) {
     SlotID = PcieRcConfig->PcieDomain[Index][0] | (PcieRcConfig->PcieDomain[Index][1] << 8) |
              (PcieRcConfig->PcieDomain[Index][2] << 16) | (PcieRcConfig->PcieDomain[Index][3] << 24);
-    UnicodeSPrint (SlotDesignation, sizeof (SlotDesignation), L"SLOT%u", SlotID);
+    BoardSlotID = MapSlot (SlotID);
+    UnicodeSPrint (SlotDesignation, sizeof (SlotDesignation), L"SLOT%u", BoardSlotID);
     HiiSetString (mSmbiosPlatformDxeHiiHandle, InputStrToken->TokenArray[0], SlotDesignation, NULL);
     InputData->DeviceType = TYPE41_DEVICE_TYPE_OTHERS;
     InputData->DeviceTypeInstance = InstanceNum;
