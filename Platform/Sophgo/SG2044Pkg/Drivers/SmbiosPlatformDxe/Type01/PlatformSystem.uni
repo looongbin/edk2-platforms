@@ -13,3 +13,5 @@
 #string STR_PLATFORM_DXE_SYSTEM_PRODUCT_NAME	#language en-US  "SOPHGO SG2044 EVB"
 #string STR_PLATFORM_DXE_SYSTEM_VERSION		#language en-US  "None"
 #string STR_PLATFORM_DXE_SYSTEM_SERIAL		#language en-US  "Not Set"
+#string STR_PLATFORM_DXE_SYSTEM_SKU_NUMBER		#language en-US  "Not Set"
+#string STR_PLATFORM_DXE_SYSTEM_FAMILY		#language en-US  "Not Set"

@@ -22,8 +22,8 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE1, PlatformSystem) = {
     4,						// Serial
     { 0x9987FD42, 0x907E, 0x5446, { 0x1D,0x7D,0x7D,0xA0,0x10,0x9F,0x60,0xA1 }},    //UUID
     6,						//Wakeup type
-    0,						//SKU
-    0,						//Family
+    5,						//SKU
+    6,						//Family
   },
   {                                             // Null-terminated table
     {
@@ -43,8 +43,10 @@ SMBIOS_PLATFORM_DXE_STRING_TOKEN_DATA (PlatformSystem) = {
       STRING_TOKEN (STR_PLATFORM_DXE_SYSTEM_MANUFACTURER),
       STRING_TOKEN (STR_PLATFORM_DXE_SYSTEM_PRODUCT_NAME),
       STRING_TOKEN (STR_PLATFORM_DXE_SYSTEM_VERSION),
-      STRING_TOKEN (STR_PLATFORM_DXE_SYSTEM_SERIAL)
+      STRING_TOKEN (STR_PLATFORM_DXE_SYSTEM_SERIAL),
+      STRING_TOKEN (STR_PLATFORM_DXE_SYSTEM_SKU_NUMBER),
+      STRING_TOKEN (STR_PLATFORM_DXE_SYSTEM_FAMILY)
     },
-    ADDITIONAL_STR_INDEX_4                  // Size of Tokens array
+    ADDITIONAL_STR_INDEX_6                  // Size of Tokens array
   }
 };
