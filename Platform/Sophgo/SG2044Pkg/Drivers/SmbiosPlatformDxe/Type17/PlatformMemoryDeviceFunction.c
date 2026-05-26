@@ -35,19 +35,29 @@ SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformMemoryDevice) {
   SMBIOS_TABLE_TYPE17  *Type17Record;
   UINT32               Size, Size0, Size1;
   BOOLEAN              IsObtainedDDRInfo;
-  // CHAR16               UnicodeStr[SMBIOS_UNICODE_STRING_MAX_LENGTH];
-  // CHAR8                value[SMBIOS_UNICODE_STRING_MAX_LENGTH];
-  // UINT64               Uint;
-  // CHAR8                *End;
-  CHAR16         *UnicodeStrFromPcd;
+  CHAR16               *UnicodeStrFromPcd;
   UINT64               Value;
+  UINTN                HandleCount;
+  UINT16               *HandleArray;
 
   InputData         = (SMBIOS_TABLE_TYPE17 *)RecordData;
   InputStrToken     = (STR_TOKEN_INFO *)StrToken;
 
+  HandleArray = NULL;
+  SmbiosPlatformDxeGetLinkTypeHandle (
+    EFI_SMBIOS_TYPE_PHYSICAL_MEMORY_ARRAY,
+    &HandleArray,
+    &HandleCount
+    );
+  if (HandleArray == NULL || HandleCount == 0) {
+    DEBUG ((DEBUG_ERROR, "[%a] Failed to get Physical Memory Array (Type16) handle\n", __func__));
+    return EFI_NOT_FOUND;
+  }
+
   while (InputData->Hdr.Type != NULL_TERMINATED_TYPE) {
       Status = SmbiosPlatformDxeSaveHiiDefaultString (InputStrToken);
       if (EFI_ERROR (Status)) {
+        FreePool (HandleArray);
         return Status;
       }
 
@@ -59,8 +69,8 @@ SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformMemoryDevice) {
       }
 
       Value = FixedPcdGet64(PcdDdrRate);
-      InputData->ExtendedSpeed = Value / 1000000;
-      InputData->ExtendedConfiguredMemorySpeed = Value / 1000000;
+      InputData->Speed = Value / 1000000;
+      InputData->ConfiguredMemoryClockSpeed = Value / 1000000;
 
       Value = FixedPcdGet64(PcdDdrRank);
       InputData->Attributes = Value;
@@ -110,23 +120,30 @@ SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformMemoryDevice) {
         InputStrToken
         );
       if (Type17Record == NULL) {
+        FreePool (HandleArray);
         return EFI_OUT_OF_RESOURCES;
       }
+
+      Type17Record->MemoryArrayHandle = HandleArray[0];
 
       Status = SmbiosPlatformDxeAddRecord ((UINT8 *)Type17Record, NULL);
       if (EFI_ERROR (Status)) {
         FreePool (Type17Record);
+        FreePool (HandleArray);
         return Status;
       }
 
       FreePool (Type17Record);
       Status = SmbiosPlatformDxeRestoreHiiDefaultString (InputStrToken);
       if (EFI_ERROR (Status)) {
+        FreePool (HandleArray);
         return Status;
       }
 
     InputData++;
     InputStrToken++;
   }
+
+  FreePool (HandleArray);
   return Status;
 }

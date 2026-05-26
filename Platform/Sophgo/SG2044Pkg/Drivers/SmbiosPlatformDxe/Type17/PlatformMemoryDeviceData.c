@@ -16,7 +16,7 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE17, PlatformMemoryDevice) = {
       sizeof (SMBIOS_TABLE_TYPE17),   // Length
       SMBIOS_HANDLE_PI_RESERVED       // Handle
     },
-    SMBIOS_HANDLE_MEMORY,             // array to which this module belongs
+    0xFFFE,                           // MemoryArrayHandle
     0xFFFE,                           // no errors
     64,                               // single DIMM, no ECC is 64bits (for ecc this would be 72)
     16,                               // data width of this device (32-bits)
@@ -27,14 +27,14 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE17, PlatformMemoryDevice) = {
     0,                                // Bank 0
     MemoryTypeLpddr5,                 // DDR4
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},  // unbuffered
-    0,                                // DRAM speed - requires update
+    8533,                             // DRAM speed - requires update
     2,                                // varies between diffrent production runs
     0,                                // serial
     0,                                // asset tag
     0,                                // part number
     2,                                // rank
     0x4000,                           // ExtendedSize; (since Size < 32GB-1)
-    0xffff,                           // ConfiguredMemoryClockSpeed - initialized at runtime
+    8533,                             // ConfiguredMemoryClockSpeed - initialized at runtime
     0,                                // MinimumVoltage; (unknown)
     0,                                // MaximumVoltage; (unknown)
     500,                              // ConfiguredVoltage; (unknown)
@@ -49,16 +49,16 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE17, PlatformMemoryDevice) = {
       0                               // Reserved                        :10;
     }},
     0,                                // FirwareVersion
-    2,                                // ModuleManufacturerID (unknown)
-    0,                                // ModuleProductID (unknown)
+    0x2C00,                                // ModuleManufacturerID
+    0,                                // ModuleProductID!
     0,                                // MemorySubsystemControllerManufacturerID (unknown)
     0,                                // MemorySubsystemControllerProductID (unknown)
     0,                                // NonVolatileSize
-    0x400000000,                      // VolatileSize - initialized at runtime
+    0x2000000000,                     // VolatileSize - initialized at runtime
     0,                                // CacheSize
-    0,                                // LogicalSize
-    8533,                             // ExtendedSpeed,
-    8533                              // ExtendedConfiguredMemorySpeed
+    0x2000000000,                     // LogicalSize
+    0,                                // ExtendedSpeed,
+    0                                 // ExtendedConfiguredMemorySpeed
   },
   {                                   // Null-terminated table
     {
