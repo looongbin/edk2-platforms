@@ -51,6 +51,10 @@ SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformBios) {
     HiiSetString (mSmbiosPlatformDxeHiiHandle, InputStrToken->TokenArray[2], UnicodeStrDate, NULL);
     HiiSetString (mSmbiosPlatformDxeHiiHandle, InputStrToken->TokenArray[0], L"SOPHGO", NULL);
 
+    InputData->BiosSize = 0xFF;
+    InputData->ExtendedBiosSize.Size = 0x10;
+    InputData->ExtendedBiosSize.Unit = 0x0;
+
     SmbiosPlatformDxeCreateTable (
       (VOID *)&Type0Record,
       (VOID *)&InputData,

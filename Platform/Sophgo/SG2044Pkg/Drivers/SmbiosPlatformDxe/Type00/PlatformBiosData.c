@@ -18,7 +18,7 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE0, PlatformBios) = {
     },
     ADDITIONAL_STR_INDEX_1,                 // SMBIOS_TABLE_STRING       Vendor
     ADDITIONAL_STR_INDEX_2,                 // SMBIOS_TABLE_STRING       BiosVersion
-    0xE800,                                 // UINT16                    BiosSegment
+    0x0,                                    // UINT16                    BiosSegment
     ADDITIONAL_STR_INDEX_3,		    // SMBIOS_TABLE_STRING       BiosReleaseDate
     0,                                      // UINT8                     BiosRomSize
     {                                       // BiosCharacteristics
@@ -57,12 +57,16 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE0, PlatformBios) = {
     },
     {
       0x3,                                  // BIOSCharacteristicsExtensionBytes[0]
-      0xC,                                  // BIOSCharacteristicsExtensionBytes[1]
+      0x8,                                  // BIOSCharacteristicsExtensionBytes[1]
     },
     0xFF,                                   // UINT8                     SystemBiosMajorRelease
     0xFF,                                   // UINT8                     SystemBiosMinorRelease
     0xFF,                                   // UINT8                     EmbeddedControllerFirmwareMajorRelease
     0xFF,                                   // UINT8                     EmbeddedControllerFirmwareMinorRelease
+    {
+      0x0,                                  // SIZE
+      0x0                                   // UNIT
+    }
   },
   {                                         // Null-terminated table
     {
