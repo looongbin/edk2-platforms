@@ -38,12 +38,10 @@ UpdateCacheSize(
   UINT16     Bytes16;
   UINT32     Bytes32;
 
-  if (!StrCmp(UnicodeStr, L"L1 Instruction Cache")) {
-    Value = FixedPcdGet64(PcdCpuL1ICacheSizeBytes);
-  } else if (!StrCmp(UnicodeStr, L"L1 Data Cache")) {
-    Value = FixedPcdGet64(PcdCpuL1DCacheSizeBytes);
+  if (!StrCmp(UnicodeStr, L"L1 Cache")) {
+    Value = FixedPcdGet64(PcdCpuCount) * (FixedPcdGet64(PcdCpuL1ICacheSizeBytes) + FixedPcdGet64(PcdCpuL1DCacheSizeBytes));
   } else if (!StrCmp(UnicodeStr, L"L2 Cache")) {
-    Value = FixedPcdGet64(PcdCpuL2CacheSizeBytes);
+    Value = (FixedPcdGet64(PcdCpuCount) / 4) * FixedPcdGet64(PcdCpuL2CacheSizeBytes);
   } else if (!StrCmp(UnicodeStr, L"L3 Cache (SLC)")) {
     Value = FixedPcdGet64(PcdCpuL3CacheSizeBytes);
   } else {
@@ -95,33 +93,6 @@ SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformCache) {
       return Status;
     }
     UnicodeStr = HiiGetString(mSmbiosPlatformDxeHiiHandle, InputStrToken->TokenArray[0], NULL);
-    // if (!StrCmp(UnicodeStr, L"L1 Instruction Cache")) {
-    //   Status = UpdateCacheSize(UnicodeStr, "l1-i-cache-size", InputData);
-    //   if (Status == RETURN_UNSUPPORTED) {
-    //     return Status;
-    //   }
-    // }
-
-    // if (!StrCmp(UnicodeStr, L"L1 Data Cache")) {
-    //   Status = UpdateCacheSize(UnicodeStr, "l1-d-cache-size", InputData);
-    //   if (Status == RETURN_UNSUPPORTED) {
-    //     return Status;
-    //   }
-    // }
-
-    // if (!StrCmp(UnicodeStr, L"L2 Cache")) {
-    //   Status = UpdateCacheSize(UnicodeStr, "l2-cache-size", InputData);
-    //   if (Status == RETURN_UNSUPPORTED) {
-    //     return Status;
-    //   }
-    // }
-
-    // if (!StrCmp(UnicodeStr, L"L3 Cache (SLC)")) {
-    //   Status = UpdateCacheSize(UnicodeStr, "l3-cache-size", InputData);
-    //   if (Status == RETURN_UNSUPPORTED) {
-    //     return Status;
-    //   }
-    // }
 
     Status = UpdateCacheSize(UnicodeStr, InputData);
 
