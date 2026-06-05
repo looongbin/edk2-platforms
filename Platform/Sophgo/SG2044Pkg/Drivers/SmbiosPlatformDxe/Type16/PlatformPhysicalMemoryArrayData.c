@@ -18,7 +18,7 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE16, PlatformPhysicalMemoryArray
     },
     MemoryArrayLocationSystemBoard,          // on motherboard
     MemoryArrayUseSystemMemory,              // system RAM
-    MemoryErrorCorrectionSingleBitEcc,       // ECC RAM
+    MemoryErrorCorrectionNone,               // None hardware error correction
     0x8000000,                               // 128GB
     0xFFFE,                                  // No error information structure
     0x1,                                     // soldered memory
