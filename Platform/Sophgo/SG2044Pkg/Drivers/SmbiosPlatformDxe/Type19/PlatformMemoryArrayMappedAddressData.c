@@ -18,10 +18,10 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE19, PlatformMemoryArrayMappedAd
     },
     0xFFFFFFFF,                                     // invalid, look at extended addr field
     0xFFFFFFFF,
-    SMBIOS_HANDLE_DIMM,                             // handle
+    0xFFFE,                                         // MemoryArrayHandle
     1,
-    0x000000000,                                    // starting addr
-    0x2000000000,                                   // ending addr
+    0x80000000,                                     // starting addr (2G)
+    0x2080000000,                                   // ending addr (130G)
   },
   {                                                 // Null-terminated table
     {
