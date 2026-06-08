@@ -22,15 +22,15 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE4, PlatformProcessor) = {
     2,                                       // manufactuer
     {{0,},{0.}},                             // processor id
     3,                                       // version
-    {0,0,0,0,0,1},                           // voltage
+    {0,0,0,1,0,1},                           // voltage
     0,                                       // external clock
-    2800,                                    // max speed
-    2800,                                    // current speed - requires update
+    2600,                                    // max speed
+    2600,                                    // current speed - requires update
     0x41,                                    // status
     ProcessorUpgradeOther,
-    SMBIOS_HANDLE_L1I,                       // l1 cache handle
-    SMBIOS_HANDLE_L2,                        // l2 cache handle
-    SMBIOS_HANDLE_L3,                        // l3 cache handle
+    0xFFFE,                                  // L1CacheHandle
+    0xFFFE,                                  // L2CacheHandle
+    0xFFFE,                                  // L3CacheHandle
     4,                                       // serial not set
     0,                                       // asset not set
     5,                                       // part number

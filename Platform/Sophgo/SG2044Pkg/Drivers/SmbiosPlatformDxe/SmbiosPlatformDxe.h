@@ -53,6 +53,9 @@ typedef enum {
   ADDITIONAL_STR_INDEX_MAX
 } ADDITIONAl_STR_INDEX;
 
+#define EFUSE_CPU_INFO_OFFSET      0x178
+#define EFUSE_CPU_SERIAL_NUM_OFFSET 0x3F8
+
 //
 // Data table entry update function.
 //
