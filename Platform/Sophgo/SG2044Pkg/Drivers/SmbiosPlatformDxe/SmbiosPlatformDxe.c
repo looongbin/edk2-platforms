@@ -534,6 +534,28 @@ SmbiosPlatformDxeDirectAddRecord (
 }
 
 /**
+  Map a PCIe controller SlotID to the physical board slot number.
+
+  When the system has 5 PCIe controllers, even-numbered SlotIDs are mapped
+  to sequential board slot numbers (SlotID/2 + 1), while odd-numbered SlotIDs
+  return 0 indicating no physical slot.
+
+  @param  SlotID   The PCIe controller slot identifier.
+
+  @retval UINT32   The board slot number, or 0 if the slot is not mapped.
+**/
+UINT32
+MapSlot (
+  IN UINT32 SlotID
+  )
+{
+  if (SlotID%2 == 0)
+    return SlotID/2+1;
+  else
+    return 0;
+}
+
+/**
   Retrieve the machine vendor ID via SBI call.
 
   Calls SBI_EXT_BASE_GET_MVENDORID to read the RISC-V machine vendor ID

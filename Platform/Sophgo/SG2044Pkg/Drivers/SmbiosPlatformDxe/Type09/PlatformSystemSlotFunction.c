@@ -20,12 +20,15 @@
 
 SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformSystemSlot) {
   EFI_STATUS                         Status;
-  UINT32                             Index, NumberOfControllers, SlotID;
+  UINT32                             Index, NumberOfControllers, SlotID, BoardSlotID;
   STR_TOKEN_INFO                     *InputStrToken;
   SMBIOS_TABLE_TYPE9                 *Type9Record;
   SMBIOS_TABLE_TYPE9                 *InputData;
   CHAR16                             SlotDesignation[SMBIOS_UNICODE_STRING_MAX_LENGTH];
-  PCIE_HOST_BRIDGE_TABLE            *PcieRcConfig;
+  PCIE_HOST_BRIDGE_TABLE             *PcieRcConfig;
+  SMBIOS_TABLE_TYPE9_EXTENDED        SmbiosRecordExtended;
+  UINTN                              TotalSize;
+  SMBIOS_TABLE_TYPE9                 *SmbiosRecord;
 
   InputData     = (SMBIOS_TABLE_TYPE9 *)RecordData;
   InputStrToken = (STR_TOKEN_INFO *)StrToken;
@@ -38,30 +41,52 @@ SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformSystemSlot) {
   NumberOfControllers = PcieRcConfig->NumOfControllers;
 
   for (Index = 0; Index < NumberOfControllers; ++Index) {
+    TotalSize    = sizeof (SMBIOS_TABLE_TYPE9) + sizeof (SMBIOS_TABLE_TYPE9_EXTENDED);
+    SmbiosRecord = NULL;
+    SmbiosRecord = AllocateZeroPool (TotalSize);
+
     SlotID = PcieRcConfig->PcieDomain[Index][0] | (PcieRcConfig->PcieDomain[Index][1] << 8) |
              (PcieRcConfig->PcieDomain[Index][2] << 16) | (PcieRcConfig->PcieDomain[Index][3] << 24);
-    UnicodeSPrint (SlotDesignation, sizeof (SlotDesignation), L"SLOT%u", SlotID);
+
+    CopyMem (SmbiosRecord, InputData, sizeof (SMBIOS_TABLE_TYPE9));
+
+    BoardSlotID = MapSlot (SlotID);
+    SmbiosRecord->SlotType = SlotTypePCIExpressGen5X8;
+    SmbiosRecord->SlotDataBusWidth = SlotDataBusWidth8X;
+
+    UnicodeSPrint (SlotDesignation, sizeof (SlotDesignation), L"SLOT%u", BoardSlotID);
     HiiSetString (mSmbiosPlatformDxeHiiHandle, InputStrToken->TokenArray[0], SlotDesignation, NULL);
-    InputData->SlotID = (UINT16) SlotID;
-    InputData->SegmentGroupNum = (UINT16) SlotID;
+    SmbiosRecord->SlotID = (UINT16)BoardSlotID;
+    SmbiosRecord->SegmentGroupNum = (UINT16)SlotID;
+
+    SmbiosRecordExtended.SlotInformation   = 0;
+    SmbiosRecordExtended.SlotPhysicalWidth = SmbiosRecord->SlotDataBusWidth;
+    SmbiosRecordExtended.SlotPitch         = 0;
+    SmbiosRecordExtended.SlotHeight        = SlotHeightFullHeight;
+
+    SmbiosRecord->Hdr.Length = sizeof (SMBIOS_TABLE_TYPE9) + sizeof (SMBIOS_TABLE_TYPE9_EXTENDED);
+    CopyMem ((UINT8 *)SmbiosRecord->PeerGroups + SmbiosRecord->PeerGroupingCount * sizeof (SmbiosRecord->PeerGroups), (UINT8 *)&SmbiosRecordExtended, sizeof (SMBIOS_TABLE_TYPE9_EXTENDED));
 
     SmbiosPlatformDxeCreateTable (
       (VOID *)&Type9Record,
-      (VOID *)&InputData,
-      sizeof (SMBIOS_TABLE_TYPE9),
+      (VOID *)&SmbiosRecord,
+      sizeof (SMBIOS_TABLE_TYPE9) + sizeof (SMBIOS_TABLE_TYPE9_EXTENDED),
       InputStrToken
       );
     if (Type9Record == NULL) {
+      FreePool (SmbiosRecord);
       return EFI_OUT_OF_RESOURCES;
     }
 
     Status = SmbiosPlatformDxeAddRecord ((UINT8 *)Type9Record, NULL);
     if (EFI_ERROR (Status)) {
       FreePool (Type9Record);
+      FreePool (SmbiosRecord);
       return Status;
     }
 
     FreePool (Type9Record);
+    FreePool (SmbiosRecord);
   }
   return EFI_SUCCESS;
 }

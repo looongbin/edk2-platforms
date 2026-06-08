@@ -20,8 +20,8 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE9, PlatformSystemSlot) = {
       SMBIOS_HANDLE_PI_RESERVED     // Handle
     },
     ADDITIONAL_STR_INDEX_1,         // Slot Designation
-    SlotTypePCIExpressGen5,         // Slot Type
-    SlotDataBusWidth8X,             // Slot Data Bus Width
+    SlotTypePCIExpressGen5X4,      // Slot Type
+    SlotDataBusWidth4X,            // Slot Data Bus Width
     SlotUsageAvailable,             // Current Usage
     SlotLengthLong,                 // Slot Length
     1,                              // Slot ID
@@ -30,7 +30,11 @@ SMBIOS_PLATFORM_DXE_TABLE_DATA (SMBIOS_TABLE_TYPE9, PlatformSystemSlot) = {
     1,                              // Segment Group Number
     0,                              // Bus Number
     0,                              // Device Function Number
-    SlotDataBusWidth8X,             // Data Bus Width (Base)
+    0,                              // Data Bus Width (Base)
+    0,                              // Peer(S/B/D/F/Width) grouping count
+    {                               // Peer(S/B/D/F/Width) groups
+	{0, 0, 0, 0}
+    }
   }
 };
 
