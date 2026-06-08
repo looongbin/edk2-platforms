@@ -11,5 +11,5 @@
 
 #string STR_PLATFORM_DXE_CHASSIS_MANUFACTURER	#language en-US  "SOPHGO"
 #string STR_PLATFORM_DXE_CHASSIS_VERSION	#language en-US  "None"
-#string STR_PLATFORM_DXE_CHASSIS_SERIAL		#language en-US  "Not Set"
+#string STR_PLATFORM_DXE_CHASSIS_SERIAL		#language en-US  "RM5004000041"
 #string STR_PLATFORM_DXE_CHASSIS_ASSET_TAG	#language en-US  "Not Set"
