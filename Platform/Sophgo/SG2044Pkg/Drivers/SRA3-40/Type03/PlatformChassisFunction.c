@@ -35,8 +35,8 @@ SMBIOS_PLATFORM_DXE_TABLE_FUNCTION (PlatformChassis) {
       return Status;
     }
 
-    InputData->Type = MiscChassisTypeDeskTop;
-    InputData->NumberofPowerCords = 1;
+    InputData->Type = MiscChassisTypeMainServerChassis;
+    InputData->NumberofPowerCords = 2;
 
     HiiSetString (mSmbiosPlatformDxeHiiHandle, InputStrToken->TokenArray[1], L"v1.0", NULL);
 
