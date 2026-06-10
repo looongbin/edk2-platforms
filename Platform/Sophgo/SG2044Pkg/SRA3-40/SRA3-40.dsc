@@ -652,7 +652,7 @@
   gSophgoSG2044PlatformPkgTokenSpaceGuid.PcdPcieHostBridgeTable.PcieSupportFlag[2]|{TRUE,FALSE,TRUE,TRUE,TRUE}
   gSophgoSG2044PlatformPkgTokenSpaceGuid.PcdPcieHostBridgeTable.PcieSupportFlag[3]|{TRUE,FALSE,TRUE,TRUE,TRUE}
   gSophgoSG2044PlatformPkgTokenSpaceGuid.PcdPcieHostBridgeTable.PcieSupportFlag[4]|{TRUE,FALSE,TRUE,TRUE,TRUE}
- 
+
   # UINT32
   gSophgoSG2044PlatformPkgTokenSpaceGuid.PcdPcieHostBridgeTable.PcieDomain[0]|{0x00,0x00,0x00,0x00}
   gSophgoSG2044PlatformPkgTokenSpaceGuid.PcdPcieHostBridgeTable.PcieDomain[1]|{0x02,0x00,0x00,0x00}
@@ -978,7 +978,7 @@
   # SMBIOS Support
   #
   MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
-  Platform/Sophgo/SG2044Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+  Platform/Sophgo/SG2044Pkg/Drivers/SRA3-40/SmbiosPlatformDxe.inf
 
   #
   # PCIe Support

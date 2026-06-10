@@ -1,0 +1,16 @@
+/** @file
+
+  Copyright (c) 2024, Ampere Computing LLC. All rights reserved.<BR>
+  Copyright (c) 2024. SOPHGO Inc. All rights reserved.<BR>
+
+  SPDX-License-Identifier: BSD-2-Clause-Patent
+
+**/
+
+/=#
+
+#string STR_PLATFORM_DXE_PROCESSOR_SOCKET_DESIGNATION	#language en-US  "SOCKET 0"
+#string STR_PLATFORM_DXE_PROCESSOR_MANUFACTURER      	#language en-US  "SOPHGO"
+#string STR_PLATFORM_DXE_PROCESSOR_VERSION           	#language en-US  "Not Set"
+#string STR_PLATFORM_DXE_PROCESSOR_SERIAL            	#language en-US  "00-00-00-00"
+#string STR_PLATFORM_DXE_PROCESSOR_PART_NUMBER		#language en-US  "Not Set"

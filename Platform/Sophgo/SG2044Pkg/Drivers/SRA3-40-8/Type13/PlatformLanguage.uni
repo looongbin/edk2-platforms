@@ -1,0 +1,12 @@
+/** @file
+
+  Copyright (c) 2024, Ampere Computing LLC. All rights reserved.<BR>
+  Copyright (c) 2024. SOPHGO Inc. All rights reserved.<BR>
+
+  SPDX-License-Identifier: BSD-2-Clause-Patent
+
+**/
+
+/=#
+
+#string STR_PLATFORM_DXE_LANGUAGE  		#language en-US  "enUS"
