@@ -1,0 +1,28 @@
+/** @file
+
+  Copyright (c) 2024, Ampere Computing LLC. All rights reserved.<BR>
+  Copyright (c) 2024. SOPHGO Inc. All rights reserved.<BR>
+
+  SPDX-License-Identifier: BSD-2-Clause-Patent
+
+**/
+
+/=#
+
+// PSU #1 (Bay 1)
+#string STR_PLATFORM_DXE_PSU_LOCATION_1		#language en-US "System Power Supply #1"
+#string STR_PLATFORM_DXE_PSU_DEVICE_NAME_1	#language en-US "CRPS2000D2"
+#string STR_PLATFORM_DXE_PSU_MANUFACTURER_1	#language en-US "GREAT WALL"
+#string STR_PLATFORM_DXE_PSU_SERIAL_1		#language en-US "2O094243964"
+#string STR_PLATFORM_DXE_PSU_ASSET_TAG_1	#language en-US "N/A"
+#string STR_PLATFORM_DXE_PSU_PART_NUMBER_1	#language en-US "CRPS-2000-D2"
+#string STR_PLATFORM_DXE_PSU_REVISION_1		#language en-US "0.0"
+
+// PSU #2 (Bay 2)
+#string STR_PLATFORM_DXE_PSU_LOCATION_2		#language en-US "System Power Supply #2"
+#string STR_PLATFORM_DXE_PSU_DEVICE_NAME_2	#language en-US "CRPS2000D2"
+#string STR_PLATFORM_DXE_PSU_MANUFACTURER_2	#language en-US "GREAT WALL"
+#string STR_PLATFORM_DXE_PSU_SERIAL_2		#language en-US "2O094243972"
+#string STR_PLATFORM_DXE_PSU_ASSET_TAG_2	#language en-US "N/A"
+#string STR_PLATFORM_DXE_PSU_PART_NUMBER_2	#language en-US "CRPS-2000-D2"
+#string STR_PLATFORM_DXE_PSU_REVISION_2		#language en-US "0.0"
