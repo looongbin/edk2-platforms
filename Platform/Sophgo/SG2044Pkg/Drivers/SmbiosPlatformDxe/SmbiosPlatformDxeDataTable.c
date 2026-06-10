@@ -86,21 +86,21 @@ SMBIOS_PLATFORM_DXE_DATA_TABLE mSmbiosPlatformDxeDataTable[] = {
   SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
     PlatformSystem
     ),
+  // Type3 (before Type2)
+  SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
+    PlatformChassis
+    ),
   // Type2
   SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
     PlatformBoard
     ),
-  // Type3
-  SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
-    PlatformChassis
-    ),
-  // Type4
-  SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
-    PlatformProcessor
-    ),
-  // Type7
+  // Type7 (before Type4)
   SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
     PlatformCache
+    ),
+  // Type4 (before Type44)
+  SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
+    PlatformProcessor
     ),
   // Type9
   SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
@@ -114,7 +114,7 @@ SMBIOS_PLATFORM_DXE_DATA_TABLE mSmbiosPlatformDxeDataTable[] = {
   SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
     PlatformLanguage
     ),
-  // Type16
+  // Type16 (before Type17 and Type19)
   SMBIOS_PLATFORM_DXE_TABLE_ENTRY_DATA_AND_FUNCTION (
     PlatformPhysicalMemoryArray
     ),
