@@ -16,8 +16,8 @@
   ENTRY_POINT                    = SmbiosPlatformDxeEntry
 
 [Sources]
-  SmbiosPlatformDxe.h
-  SmbiosPlatformDxe.c
+  Platform/Sophgo/SG2044Pkg/Drivers/SmbiosPlatformDxe.h
+  Platform/Sophgo/SG2044Pkg/Drivers/SmbiosPlatformDxe.c
   SmbiosPlatformDxeDataTable.c
   SmbiosPlatformDxeStrings.uni
   Type00/PlatformBiosData.c

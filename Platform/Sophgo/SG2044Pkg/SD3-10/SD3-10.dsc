@@ -979,7 +979,7 @@
   # SMBIOS Support
   #
   MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
-  Platform/Sophgo/SG2044Pkg/Drivers/SmbiosPlatformDxe/SmbiosPlatformDxe.inf
+  Platform/Sophgo/SG2044Pkg/Drivers/SD3-10/SmbiosPlatformDxe.inf
 
   #
   # PCIe Support
